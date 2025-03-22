@@ -1,0 +1,4 @@
+OPENROUTER_API_KEY=tu api de OpenRouter
+YOUR_SITE_URL=aikrd.netlify.app
+YOUR_SITE_NAME=AIK
+YOUR_MODEL_AI=qwen/qwen-2.5-72b-instruct:free
