@@ -38,7 +38,7 @@ const app = express();
 //     credentials: true,
 // }));
 app.use(cors({
-    origin: NODE_ENV === 'development' ? 'http://localhost' : process.env.CORS_ORIGIN,  // Restrict origin in production
+    origin: NODE_ENV === 'development' ? 'http://localhost:5173' : process.env.CORS_ORIGIN,  // Restrict origin in production
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
 }));
