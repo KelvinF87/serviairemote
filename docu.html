@@ -1,0 +1,1486 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IA3 API Documentation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>IA3 API Documentation</h1>
+      <div class="language-selector">
+        <button onclick="switchLanguage('en')">English</button>
+        <button onclick="switchLanguage('es')">Español</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="api-endpoints">
+        <h2>API Endpoints</h2>
+
+        <!-- Chat Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/chat</h3>
+          <p>
+            <strong>Description:</strong> Sends a chat message to the AI and
+            receives a response.
+          </p>
+          <p><strong>Method:</strong> POST</p>
+          <p><strong>Authentication:</strong> Yes</p>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "messages": [
+                            {
+                                "roles": "user",
+                                "content": "Your message here"
+                            }
+                        ],
+                        "modelId": "model-id-from-db"  // Optional: Specify the AI model to use
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "choices": [
+                            {
+                                "message": {
+                                    "content": "AI response here"
+                                }
+                            }
+                        ]
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/chat</h3>
+          <p>
+            <strong>Descripción:</strong> Envía un mensaje de chat a la IA y
+            recibe una respuesta.
+          </p>
+          <p><strong>Método:</strong> POST</p>
+          <p><strong>Autenticación:</strong> Si requerida</p>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "messages": [
+                            {
+                                "roles": "user",
+                                "content": "Tu mensaje aquí"
+                            }
+                        ],
+                         "modelId": "model-id-from-db" // Opcional: Especifica el modelo de IA a usar
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "choices": [
+                            {
+                                "message": {
+                                    "content": "Respuesta de la IA aquí"
+                                }
+                            }
+                        ]
+                    }
+                </code></pre>
+        </article>
+
+        <!-- Auth Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/auth/signup</h3>
+          <p><strong>Description:</strong> Registers a new user.</p>
+          <p><strong>Method:</strong> POST</p>
+          <p><strong>Authentication:</strong> No</p>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "name": "Your Name",
+                        "email": "your.email@example.com",
+                        "password": "YourPassword123",
+                        "roles": "user",
+                        "prompt": "DefaultPrompt",
+                        "active": true,
+                        "img": "URL to your image"
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "Your Name",
+                        "email": "your.email@example.com",
+                        "roles": "user",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/auth/signup</h3>
+          <p><strong>Descripción:</strong> Registra un nuevo usuario.</p>
+          <p><strong>Método:</strong> POST</p>
+          <p><strong>Autenticación:</strong> No requerida</p>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "name": "Tu Nombre",
+                        "email": "tu.correo@ejemplo.com",
+                        "password": "TuContraseña123",
+                        "roles": "user",
+                        "prompt": "PromptPredeterminado",
+                        "active": true,
+                        "img": "URL a tu imagen"
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "Tu Nombre",
+                        "email": "tu.correo@ejemplo.com",
+                        "roles": "user",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/auth/login</h3>
+          <p>
+            <strong>Description:</strong> Authenticates an existing user and
+            returns a JWT.
+          </p>
+          <p><strong>Method:</strong> POST</p>
+          <p><strong>Authentication:</strong> No</p>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "email": "your.email@example.com",
+                        "password": "YourPassword123"
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "authToken": "Your JWT Token"
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/auth/login</h3>
+          <p>
+            <strong>Descripción:</strong> Autentica un usuario existente y
+            devuelve un JWT.
+          </p>
+          <p><strong>Método:</strong> POST</p>
+          <p><strong>Autenticación:</strong> No requerida</p>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "email": "tu.correo@ejemplo.com",
+                        "password": "TuContraseña123"
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "authToken": "Tu Token JWT"
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/auth/verify</h3>
+          <p>
+            <strong>Description:</strong> Verifies the JWT and returns the
+            user's payload.
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "Your Name",
+                        "email": "your.email@example.com",
+                        "roles": "user"
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/auth/verify</h3>
+          <p>
+            <strong>Descripción:</strong> Verifica el JWT y devuelve la
+            información del usuario.
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "Tu Nombre",
+                        "email": "tu.correo@ejemplo.com",
+                        "roles": "user"
+                    }
+                </code></pre>
+        </article>
+
+        <!-- User Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/users</h3>
+          <p><strong>Description:</strong> Gets all users (Admin only).</p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your Admin JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    [
+                        {
+                            "_id": "...",
+                            "name": "User 1",
+                            "email": "...",
+                            "roles": "user"
+                        },
+                        {
+                            "_id": "...",
+                            "name": "Admin User",
+                            "email": "...",
+                            "roles": "admin"
+                        }
+                    ]
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/users</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene todos los usuarios (Solo
+            Admin).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT de Admin
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    [
+                        {
+                            "_id": "...",
+                            "name": "Usuario 1",
+                            "email": "...",
+                            "roles": "user"
+                        },
+                        {
+                            "_id": "...",
+                            "name": "Usuario Admin",
+                            "email": "...",
+                            "roles": "admin"
+                        }
+                    ]
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/users/:id</h3>
+          <p><strong>Description:</strong> Gets user by ID</p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                  {
+                      "_id": "66695f6d1b1966584b445e7b",
+                      "name": "user",
+                      "email": "user@gmail.com",
+                      "roles": "user",
+                      "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                      "prompt": "user",
+                      "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                      "active": true,
+                      "createdAt": "2024-06-12T20:47:41.272Z",
+                      "updatedAt": "2024-06-12T20:47:41.272Z",
+                      "__v": 0
+                  }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/users/:id</h3>
+          <p><strong>Descripción:</strong> Obtiene usuario por ID</p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                   {
+                      "_id": "66695f6d1b1966584b445e7b",
+                      "name": "user",
+                      "email": "user@gmail.com",
+                      "roles": "user",
+                      "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                      "prompt": "user",
+                      "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                      "active": true,
+                      "createdAt": "2024-06-12T20:47:41.272Z",
+                      "updatedAt": "2024-06-12T20:47:41.272Z",
+                      "__v": 0
+                  }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>PUT /api/users/:id</h3>
+          <p><strong>Description:</strong> Updates user by ID</p>
+          <p><strong>Method:</strong> PUT</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "name": "Updated user",
+                        "email": "user@gmail.com",
+                        "roles": "user",
+                        "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                        "prompt": "user",
+                        "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                   {
+                      "_id": "66695f6d1b1966584b445e7b",
+                      "name": "Updated user",
+                      "email": "user@gmail.com",
+                      "roles": "user",
+                      "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                      "prompt": "user",
+                      "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                      "active": true,
+                      "createdAt": "2024-06-12T20:47:41.272Z",
+                      "updatedAt": "2024-06-12T20:47:41.272Z",
+                      "__v": 0
+                  }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>PUT /api/users/:id</h3>
+          <p><strong>Descripción:</strong> Actualiza usuario por ID</p>
+          <p><strong>Método:</strong> PUT</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "name": "Updated user",
+                        "email": "user@gmail.com",
+                        "roles": "user",
+                        "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                        "prompt": "user",
+                        "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                   {
+                      "_id": "66695f6d1b1966584b445e7b",
+                      "name": "Updated user",
+                      "email": "user@gmail.com",
+                      "roles": "user",
+                      "img": "https://res.cloudinary.com/dzq7v9h3x/image/upload/v1698159587/avatars/default-avatar.png",
+                      "prompt": "user",
+                      "idprompt": "649b0f1c4a2d3e5f8c8b4567",
+                      "active": true,
+                      "createdAt": "2024-06-12T20:47:41.272Z",
+                      "updatedAt": "2024-06-12T20:47:41.272Z",
+                      "__v": 0
+                  }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>DELETE /api/users/:id</h3>
+          <p><strong>Description:</strong> Deletes user by ID</p>
+          <p><strong>Method:</strong> DELETE</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                   204 No Content
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>DELETE /api/users/:id</h3>
+          <p><strong>Descripción:</strong> Elimina usuario por ID</p>
+          <p><strong>Método:</strong> DELETE</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                   204 No Content
+                </code></pre>
+        </article>
+
+        <!-- Modelo Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/modelos</h3>
+          <p>
+            <strong>Description:</strong> Creates a new AI Model (Admin only).
+          </p>
+          <p><strong>Method:</strong> POST</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your Admin JWT Token
+                </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "OpenAI's GPT-4 Turbo model",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "OpenAI's GPT-4 Turbo model",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/modelos</h3>
+          <p>
+            <strong>Descripción:</strong> Crea un nuevo Modelo de IA (Solo
+            Admin).
+          </p>
+          <p><strong>Método:</strong> POST</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT de Admin
+                </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "Modelo GPT-4 Turbo de OpenAI",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "Modelo GPT-4 Turbo de OpenAI",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/modelos</h3>
+          <p>
+            <strong>Description:</strong> Gets all AI Models (Authenticated
+            users).
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your  JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    [
+                        {
+                            "_id": "...",
+                            "name": "GPT-4 Turbo",
+                            "modelId": "openai/gpt-4-turbo",
+                            "description": "OpenAI's GPT-4 Turbo model",
+                            "active": true,
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        },
+                         {
+                            "_id": "...",
+                            "name": "GPT-3.5 Turbo",
+                            "modelId": "openai/gpt-3.5-turbo",
+                            "description": "OpenAI's GPT-3.5 Turbo model",
+                            "active": true,
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    ]
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/modelos</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene todos los Modelos de IA
+            (Usuarios autenticados).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                     [
+                        {
+                            "_id": "...",
+                            "name": "GPT-4 Turbo",
+                            "modelId": "openai/gpt-4-turbo",
+                            "description": "Modelo GPT-4 Turbo de OpenAI",
+                            "active": true,
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        },
+                         {
+                            "_id": "...",
+                            "name": "GPT-3.5 Turbo",
+                            "modelId": "openai/gpt-3.5-turbo",
+                            "description": "Modelo GPT-3.5 Turbo de OpenAI",
+                            "active": true,
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    ]
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/modelos/:id</h3>
+          <p>
+            <strong>Description:</strong> Gets AI Model by ID (Authenticated
+            users).
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your  JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                   {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "OpenAI's GPT-4 Turbo model",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/modelos/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene Modelo de IA por ID (Usuarios
+            autenticados).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                     {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "Modelo GPT-4 Turbo de OpenAI",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>PUT /api/modelos/:id</h3>
+          <p>
+            <strong>Description:</strong> Updates AI Model by ID (Admin only).
+          </p>
+          <p><strong>Method:</strong> PUT</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your Admin JWT Token
+                </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "OpenAI's GPT-4 Turbo model",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                   {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "OpenAI's GPT-4 Turbo model",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>PUT /api/modelos/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Actualiza Modelo de IA por ID (Solo
+            Admin).
+          </p>
+          <p><strong>Método:</strong> PUT</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT de Admin
+                </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "Modelo GPT-4 Turbo de OpenAI",
+                        "active": true
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                     {
+                        "_id": "...",
+                        "name": "GPT-4 Turbo",
+                        "modelId": "openai/gpt-4-turbo",
+                        "description": "Modelo GPT-4 Turbo de OpenAI",
+                        "active": true,
+                        "createdAt": "...",
+                        "updatedAt": "...",
+                        "__v": 0
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>DELETE /api/modelos/:id</h3>
+          <p>
+            <strong>Description:</strong> Deletes AI Model by ID (Admin only).
+          </p>
+          <p><strong>Method:</strong> DELETE</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your Admin JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    204 No Content
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>DELETE /api/modelos/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Elimina Modelo de IA por ID (Solo
+            Admin).
+          </p>
+          <p><strong>Método:</strong> DELETE</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT de Admin
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                   204 No Content
+                </code></pre>
+        </article>
+
+        <!-- PromptSystem Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/promptSystems</h3>
+          <p>
+            <strong>Description:</strong> Creates a new Prompt System (Admin
+            only).
+          </p>
+          <p><strong>Method:</strong> POST</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+            Authorization: Bearer Your Admin JWT Token
+        </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+            {
+                "name": "Nombre del Prompt",
+                "prompt": "Contenido del Prompt",
+                "description": "Descripción del Prompt",
+                "active": true
+            }
+        </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Nombre del Prompt",
+                "prompt": "Contenido del Prompt",
+                "description": "Descripción del Prompt",
+                "active": true,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/promptSystems</h3>
+          <p>
+            <strong>Descripción:</strong> Crea un nuevo Sistema de Prompts (Solo
+            Admin).
+          </p>
+          <p><strong>Método:</strong> POST</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+            Authorization: Bearer Tu Token JWT de Admin
+        </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+            {
+                "name": "Prompt Name",
+                "prompt": "Prompt Content",
+                "description": "Prompt Description",
+                "active": true
+            }
+        </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Prompt Name",
+                "prompt": "Prompt Content",
+                "description": "Prompt Description",
+                "active": true,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/promptSystems</h3>
+          <p>
+            <strong>Description:</strong> Gets all Prompt Systems (Authenticated
+            users).
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+            Authorization: Bearer Your JWT Token
+        </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+            [
+                {
+                    "_id": "...",
+                    "name": "Nombre del Prompt 1",
+                    "prompt": "Contenido del Prompt 1",
+                    "description": "Descripción del Prompt 1",
+                    "active": true,
+                    "createdAt": "...",
+                    "updatedAt": "...",
+                    "__v": 0
+                },
+                {
+                    "_id": "...",
+                    "name": "Nombre del Prompt 2",
+                    "prompt": "Contenido del Prompt 2",
+                    "description": "Descripción del Prompt 2",
+                    "active": false,
+                    "createdAt": "...",
+                    "updatedAt": "...",
+                    "__v": 0
+                }
+            ]
+        </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/promptSystems</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene todos los Sistemas de Prompts
+            (Usuarios autenticados).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+            Authorization: Bearer Tu Token JWT
+        </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+            [
+                {
+                    "_id": "...",
+                    "name": "Prompt Name 1",
+                    "prompt": "Prompt Content 1",
+                    "description": "Prompt Description 1",
+                    "active": true,
+                    "createdAt": "...",
+                    "updatedAt": "...",
+                    "__v": 0
+                },
+                {
+                    "_id": "...",
+                    "name": "Prompt Name 2",
+                    "prompt": "Prompt Content 2",
+                    "description": "Prompt Description 2",
+                    "active": false,
+                    "createdAt": "...",
+                    "updatedAt": "...",
+                    "__v": 0
+                }
+            ]
+        </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/promptSystems/:id</h3>
+          <p>
+            <strong>Description:</strong> Gets a Prompt System by ID
+            (Authenticated users).
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+            Authorization: Bearer Your JWT Token
+        </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Nombre del Prompt",
+                "prompt": "Contenido del Prompt",
+                "description": "Descripción del Prompt",
+                "active": true,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/promptSystems/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene un Sistema de Prompts por ID
+            (Usuarios autenticados).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+            Authorization: Bearer Tu Token JWT
+        </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Prompt Name",
+                "prompt": "Prompt Content",
+                "description": "Prompt Description",
+                "active": true,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>PUT /api/promptSystems/:id</h3>
+          <p>
+            <strong>Description:</strong> Updates a Prompt System by ID (Admin
+            only).
+          </p>
+          <p><strong>Method:</strong> PUT</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+            Authorization: Bearer Your Admin JWT Token
+        </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+            {
+                "name": "Nombre del Prompt Actualizado",
+                "prompt": "Contenido del Prompt Actualizado",
+                "description": "Descripción del Prompt Actualizado",
+                "active": false
+            }
+        </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Nombre del Prompt Actualizado",
+                "prompt": "Contenido del Prompt Actualizado",
+                "description": "Descripción del Prompt Actualizado",
+                "active": false,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>PUT /api/promptSystems/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Actualiza un Sistema de Prompts por ID
+            (Solo Admin).
+          </p>
+          <p><strong>Método:</strong> PUT</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+            Authorization: Bearer Tu Token JWT de Admin
+        </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+            {
+                "name": "Updated Prompt Name",
+                "prompt": "Updated Prompt Content",
+                "description": "Updated Prompt Description",
+                "active": false
+            }
+        </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+            {
+                "_id": "...",
+                "name": "Updated Prompt Name",
+                "prompt": "Updated Prompt Content",
+                "description": "Updated Prompt Description",
+                "active": false,
+                "createdAt": "...",
+                "updatedAt": "...",
+                "__v": 0
+            }
+        </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>DELETE /api/promptSystems/:id</h3>
+          <p>
+            <strong>Description:</strong> Deletes a Prompt System by ID (Admin
+            only).
+          </p>
+          <p><strong>Method:</strong> DELETE</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+            204 No Content
+        </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>DELETE /api/promptSystems/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Elimina un Sistema de Prompts por ID
+            (Solo Admin).
+          </p>
+          <p><strong>Método:</strong> DELETE</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+            204 No Content
+        </code></pre>
+        </article>
+
+        <!-- Message Routes -->
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/messages</h3>
+          <p>
+            <strong>Description:</strong> Gets all messages for the
+            authenticated user.
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    [
+                        {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "User's message",
+                            "response": "AI's response",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "Another user message",
+                            "response": "Another AI response",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    ]
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/messages</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene todos los mensajes del usuario
+            autenticado.
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    [
+                        {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "Mensaje del usuario",
+                            "response": "Respuesta de la IA",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "Otro mensaje del usuario",
+                            "response": "Otra respuesta de la IA",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    ]
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>GET /api/messages/:id</h3>
+          <p>
+            <strong>Description:</strong> Gets a specific message by ID (Admin
+            only).
+          </p>
+          <p><strong>Method:</strong> GET</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                     Authorization: Bearer Your Admin JWT Token
+                 </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                     {
+                         "_id": "...",
+                         "user": "...",
+                         "message": "User's message",
+                         "response": "AI's response",
+                         "createdAt": "...",
+                         "updatedAt": "...",
+                         "__v": 0
+                     }
+                 </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>GET /api/messages/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Obtiene un mensaje específico por ID
+            (Solo Admin).
+          </p>
+          <p><strong>Método:</strong> GET</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                     Authorization: Bearer Tu Token JWT de Admin
+                 </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                     {
+                         "_id": "...",
+                         "user": "...",
+                         "message": "Mensaje del usuario",
+                         "response": "Respuesta de la IA",
+                         "createdAt": "...",
+                         "updatedAt": "...",
+                         "__v": 0
+                     }
+                 </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>POST /api/messages</h3>
+          <p>
+            <strong>Description:</strong> Creates a new message for the
+            authenticated user.
+          </p>
+          <p><strong>Method:</strong> POST</p>
+          <p>
+            <strong>Authentication:</strong> Yes (JWT required in Authorization
+            header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your JWT Token
+                </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                     {
+                        "content": "The user's message content"
+                     }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                   {
+                         "message": "Message created successfully",
+                         "data": {
+                             "_id": "...",
+                             "user": "...",
+                             "message": "The user's message content",
+                             "response": null,
+                             "createdAt": "...",
+                             "updatedAt": "...",
+                             "__v": 0
+                        }
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>POST /api/messages</h3>
+          <p>
+            <strong>Descripción:</strong> Crea un nuevo mensaje para el usuario
+            autenticado.
+          </p>
+          <p><strong>Método:</strong> POST</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT requerido en el encabezado
+            Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT
+                </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                     {
+                         "content": "El contenido del mensaje del usuario"
+                     }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "message": "Mensaje creado exitosamente",
+                        "data": {
+                             "_id": "...",
+                             "user": "...",
+                             "message": "El contenido del mensaje del usuario",
+                             "response": null,
+                             "createdAt": "...",
+                             "updatedAt": "...",
+                             "__v": 0
+                        }
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>PUT /api/messages/:id</h3>
+          <p>
+            <strong>Description:</strong> Updates a specific message by ID
+            (Admin only).
+          </p>
+          <p><strong>Method:</strong> PUT</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Request Headers:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Your Admin JWT Token
+                </code></pre>
+          <p><strong>Request Body:</strong></p>
+          <pre><code>
+                    {
+                        "content": "Updated message content"
+                    }
+                </code></pre>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    {
+                        "message": "Message updated successfully",
+                        "data": {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "Updated message content",
+                            "response": "AI's response",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    }
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>PUT /api/messages/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Actualiza un mensaje específico por ID
+            (Solo Admin).
+          </p>
+          <p><strong>Método:</strong> PUT</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Encabezados de la Solicitud:</strong></p>
+          <pre><code>
+                    Authorization: Bearer Tu Token JWT de Admin
+                </code></pre>
+          <p><strong>Cuerpo de la Solicitud:</strong></p>
+          <pre><code>
+                    {
+                        "content": "Contenido del mensaje actualizado"
+                    }
+                </code></pre>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    {
+                        "message": "Mensaje actualizado exitosamente",
+                        "data": {
+                            "_id": "...",
+                            "user": "...",
+                            "message": "Contenido del mensaje actualizado",
+                            "response": "Respuesta de la IA",
+                            "createdAt": "...",
+                            "updatedAt": "...",
+                            "__v": 0
+                        }
+                    }
+                </code></pre>
+        </article>
+
+        <article data-lang="en" class="endpoint">
+          <h3>DELETE /api/messages/:id</h3>
+          <p>
+            <strong>Description:</strong> Deletes a specific message by ID
+            (Admin only).
+          </p>
+          <p><strong>Method:</strong> DELETE</p>
+          <p>
+            <strong>Authentication:</strong> Yes (Admin JWT required in
+            Authorization header)
+          </p>
+          <p><strong>Response Example:</strong></p>
+          <pre><code>
+                    204 No Content
+                </code></pre>
+        </article>
+        <article data-lang="es" class="endpoint" style="display: none">
+          <h3>DELETE /api/messages/:id</h3>
+          <p>
+            <strong>Descripción:</strong> Elimina un mensaje específico por ID
+            (Solo Admin).
+          </p>
+          <p><strong>Método:</strong> DELETE</p>
+          <p>
+            <strong>Autenticación:</strong> Sí (JWT de Admin requerido en el
+            encabezado Authorization)
+          </p>
+          <p><strong>Ejemplo de Respuesta:</strong></p>
+          <pre><code>
+                    204 No Content
+                </code></pre>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Kelvin Familia</p>
+    </footer>
+
+    <script>
+      function switchLanguage(lang) {
+        const articles = document.querySelectorAll(".endpoint");
+        articles.forEach((article) => {
+          article.style.display =
+            article.dataset.lang === lang ? "block" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>
