@@ -32,16 +32,14 @@ const app = express();
 
 
 // **Middleware Configuration**
-// app.use(cors({
-//     origin: NODE_ENV === 'development' ? '*' : process.env.CORS_ORIGIN,  // Restrict origin in production
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true,
-// }));
+
+// CORS Configuration (Revised)
 app.use(cors({
-    origin: NODE_ENV === 'development' ? '*' : process.env.CORS_ORIGIN,  // Restrict origin in production
+    origin: NODE_ENV === 'development' ? '*' : process.env.CORS_ORIGIN, // Restrict origin in production
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+    credentials: true, // Important if you're using cookies
 }));
+
 app.use(morgan(NODE_ENV === 'development' ? "dev" : "combined")); // Shorter logs in production
 app.use(express.json());
 app.use(cookieParser()); // If you use cookies
@@ -50,14 +48,21 @@ app.use(cookieParser()); // If you use cookies
 // **Apply Rate Limiting**
 app.use(limiter);
 
-// Create mongoose connection with DB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => {
-    console.error("Error connecting to MongoDB", err);
-    process.exit(1); // Salir del proceso si no se puede conectar
-  });
+// Database Connection (Revised with better error handling)
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Error connecting to MongoDB:", err.message);
+    console.error("Ensure MONGO_URI is correct and MongoDB is accessible.");
+    //Optionally try to reconnect after a delay
+    //setTimeout(connectDB, 5000); //Reconnect after 5 seconds
+    process.exit(1); // Exit the process for now
+  }
+};
+
+connectDB(); // Call the async function
 
 // **Route Definitions**
 app.use('/api', chatRoutes);
@@ -75,8 +80,21 @@ app.use((err, req, res, next) => {
 });
 
 // **Server Startup**
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server is running in ${NODE_ENV} mode on port ${PORT}`);
+});
+
+// **Unhandled Rejection Handling**
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // Consider logging the error or taking other appropriate action
+});
+
+// **Uncaught Exception Handling**
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // Handle the error gracefully, potentially exiting the process
+  process.exit(1);
 });
 
 // **Example Input Validation Middleware**
