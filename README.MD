@@ -193,3 +193,5 @@ Este proyecto es de código abierto y está disponible en GitHub.
 *   **Formato:** Se mejoró el formato general del README para una mejor legibilidad.
 
 Este README actualizado proporciona mucha más información y contexto para que otros puedan entender, configurar y usar tu proyecto ServIAIRemote.  Recuerda reemplazar los valores de ejemplo en el archivo `.env` con tus propias credenciales.
+
+Este proyecto se distribuye bajo la Licencia MIT. Esta licencia permite el uso, copia, modificación, fusión, publicación, distribución, sublicencia y/o venta del software, siempre y cuando se incluya el aviso de copyright original y este aviso de permiso en todas las copias o partes sustanciales del software. Consulta el archivo LICENSE para obtener los detalles completos de la licencia.
