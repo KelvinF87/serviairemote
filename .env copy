@@ -1,4 +1,12 @@
-OPENROUTER_API_KEY=tu api de OpenRouter
-YOUR_SITE_URL=aikrd.netlify.app
+TOKEN_SECRET=
+OPENROUTER_API_KEY=sk-or-v1-
+MONGO_URI=mongodb+srv://docentekj:@dbpower.oufxs.net/aikdb
+YOUR_SITE_URL=https://kelvinf87.github.io
+CORS_ORIGIN=https://kelvinf87.github.io
 YOUR_SITE_NAME=AIK
-YOUR_MODEL_AI=qwen/qwen-2.5-72b-instruct:free
+YOUR_MODEL_AI=qwen/qwen-2.5-coder-32b-instruct:free
+BREVO_API_KEY=SHIKXQKX2Y0Z
+EMAIL=your_email@example.com
+NODE_ENV=development
+# PORT=
+PORT=
